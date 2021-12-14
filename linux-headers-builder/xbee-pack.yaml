@@ -1,0 +1,29 @@
+schema-version: 1.0
+
+type: builder
+
+
+const:
+  srcDir: /usr/src
+  exportDir: /opt/linux-headers
+
+
+var:
+  version: 5.13.12
+
+provision:
+  - url:
+      from: https://www.kernel.org/pub/linux/kernel/v{{ majorVersion .pack.version }}.x/linux-{% version %}.tar.xz
+      todir: "{% srcDir %}"
+
+build:
+  - shell:
+      cmds:
+        - make mrproper
+        - make headers
+        - find usr/include -name '.*' -delete
+        - rm usr/include/Makefile
+        - cp -rv usr/include {% exportDir %}
+      directory: "{% srcDir %}/linux-{% version %}"
+  - export: "{% exportDir %}"
+

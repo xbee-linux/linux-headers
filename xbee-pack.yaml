@@ -1,0 +1,37 @@
+schema-version: 1.0
+
+description: |
+  The Linux API Headers (in linux-{% version %}.tar.xz) expose the kernel's API for use by Glibc.
+
+  Installed headers: /usr/include/asm/*.h, /usr/include/asm-generic/*.h, /usr/include/drm/*.h, /usr/include/linux/*.h, /usr/include/misc/*.h, /usr/include/mtd/*.h, /usr/include/rdma/*.h, /usr/include/scsi/*.h, /usr/include/sound/*.h, /usr/include/video/*.h, and /usr/include/xen/*.h
+
+  Installed directories: /usr/include/asm, /usr/include/asm-generic, /usr/include/drm, /usr/include/linux, /usr/include/misc, /usr/include/mtd, /usr/include/rdma, /usr/include/scsi, /usr/include/sound, /usr/include/video, and /usr/include/xen
+
+  Short Descriptions
+
+    /usr/include/asm/*.h: The Linux API ASM Headers
+    /usr/include/asm-generic/*.h: The Linux API ASM Generic Headers
+    /usr/include/drm/*.h: The Linux API DRM Headers
+    /usr/include/linux/*.h: The Linux API Linux Headers
+    /usr/include/misc/*.h: The Linux API Miscellaneous Headers
+    /usr/include/mtd/*.h: The Linux API MTD Headers
+    /usr/include/rdma/*.h: The Linux API RDMA Headers
+    /usr/include/scsi/*.h: The Linux API SCSI Headers
+    /usr/include/sound/*.h: The Linux API Sound Headers
+    /usr/include/video/*.h: The Linux API Video Headers
+    /usr/include/xen/*.h: The Linux API Xen Headers
+
+builder:
+  origin: ./linux-headers-builder
+  var:
+    version: "{% version %}"
+
+
+var:
+  version: 5.13.12
+
+
+provision:
+  - copy:
+      builder: linux-headers
+      todir: /usr/include
