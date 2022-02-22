@@ -30,6 +30,7 @@ provision:
   - url:
       from: https://www.kernel.org/pub/linux/kernel/v{{ majorVersion .pack.version }}.x/linux-{% version %}.tar.xz
       todir: "{% xbeeSrc %}"
+  - folder: "{% xbeeOut %}/usr/include"
 
 build:
   - shell:
