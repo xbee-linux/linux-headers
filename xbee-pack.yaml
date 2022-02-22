@@ -1,5 +1,7 @@
 schema-version: 1.0
 
+type: builder
+
 description: |
   The Linux API Headers (in linux-{% version %}.tar.xz) expose the kernel's API for use by Glibc.
 
@@ -21,17 +23,22 @@ description: |
     /usr/include/video/*.h: The Linux API Video Headers
     /usr/include/xen/*.h: The Linux API Xen Headers
 
-builder:
-  origin: ./linux-headers-builder
-  var:
-    version: "{% version %}"
-
-
-var:
+in:
   version: 5.13.12
 
-
 provision:
-  - copy:
-      builder: linux-headers
-      todir: /usr/include
+  - url:
+      from: https://www.kernel.org/pub/linux/kernel/v{{ majorVersion .pack.version }}.x/linux-{% version %}.tar.xz
+      todir: "{% xbeeSrc %}"
+
+build:
+  - shell:
+      cmds:
+        - make mrproper
+        - make headers
+        - find usr/include -name '.*' -delete
+        - rm usr/include/Makefile
+        - cp -rv usr/include {% xbeeOut %}/usr
+      directory: "{% xbeeSrc %}/linux-{% version %}"
+
+
