@@ -27,9 +27,7 @@ var:
   version: 5.13.12
 
 provision:
-  - url:
-      from: https://www.kernel.org/pub/linux/kernel/v{{ majorVersion .version }}.x/linux-{{ .version }}.tar.xz
-      todir: "{{ .xbee.src }}"
+  - url: https://www.kernel.org/pub/linux/kernel/v{{ majorVersion .version }}.x/linux-{{ .version }}.tar.xz
   - folder: "{{ .xbee.out }}/usr/include"
 
 build:
