@@ -24,7 +24,8 @@ description: |
     /usr/include/xen/*.h: The Linux API Xen Headers
 
 var:
-  version: 5.13.12
+  xbee:
+    version: 5.13.12
 
 provision:
   - url: https://www.kernel.org/pub/linux/kernel/v{{ majorVersion .version }}.x/linux-{{ .version }}.tar.xz
