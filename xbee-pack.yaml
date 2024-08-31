@@ -3,7 +3,7 @@ schema-version: 1.0
 type: builder
 
 description: |
-  The Linux API Headers (in linux-{{ .version }}.tar.xz) expose the kernel's API for use by Glibc.
+  The Linux API Headers (in linux-{{ .xbee.version }}.tar.xz) expose the kernel's API for use by Glibc.
 
   Installed headers: /usr/include/asm/*.h, /usr/include/asm-generic/*.h, /usr/include/drm/*.h, /usr/include/linux/*.h, /usr/include/misc/*.h, /usr/include/mtd/*.h, /usr/include/rdma/*.h, /usr/include/scsi/*.h, /usr/include/sound/*.h, /usr/include/video/*.h, and /usr/include/xen/*.h
 
@@ -28,7 +28,7 @@ var:
     version: 5.13.12
 
 provision:
-  - url: https://www.kernel.org/pub/linux/kernel/v{{ majorVersion .version }}.x/linux-{{ .version }}.tar.xz
+  - url: https://www.kernel.org/pub/linux/kernel/v{{ majorVersion .xbee.version }}.x/linux-{{ .xbee.version }}.tar.xz
   - folder: "{{ .xbee.out }}/usr/include"
 
 build:
@@ -39,6 +39,6 @@ build:
         - find usr/include -name '.*' -delete
         - rm usr/include/Makefile
         - cp -rv usr/include {{ .xbee.out }}/usr
-      directory: "{{ .xbee.src }}/linux-{{ .version }}"
+      directory: "{{ .xbee.src }}/linux-{{ .xbee.version }}"
 
 
