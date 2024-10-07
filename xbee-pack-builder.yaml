@@ -1,7 +1,5 @@
 schema-version: 1.0
 
-type: builder
-
 description: |
   The Linux API Headers (in linux-{{ .xbee.version }}.tar.xz) expose the kernel's API for use by Glibc.
 
