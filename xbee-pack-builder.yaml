@@ -31,7 +31,7 @@ provision:
 
 build:
   - shell:
-      cmds:
+      cmd:
         - make mrproper
         - make headers
         - find usr/include -name '.*' -delete
